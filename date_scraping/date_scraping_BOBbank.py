@@ -34,7 +34,12 @@ proxies_list = ['180.183.157.159:8080',
  '194.195.213.197:1080',]
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-chrome = webdriver.ChromeOptions()
+from selenium.webdriver.chrome.options import Options
+
+# Set up Chrome options
+chrome_options = Options()
+chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(options=chrome_options)
 url1 = "https://www.bankofbaroda.in"
 url = "https://www.bankofbaroda.in/interest-rate-and-service-charges/deposits-interest-rates"
 bcode = 100

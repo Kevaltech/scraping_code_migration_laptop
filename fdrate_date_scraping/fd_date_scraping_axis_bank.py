@@ -6,7 +6,12 @@ import io
 from selenium import webdriver
 from urllib.request import urlopen
 
-driver = webdriver.Chrome()
+from selenium.webdriver.chrome.options import Options
+
+# Set up Chrome options
+chrome_options = Options()
+chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(options=chrome_options)
 url = "https://www.axisbank.com/interest-rate-on-deposits"
 bcode = 200
 def get_date():

@@ -7,7 +7,12 @@ from selenium import webdriver
 url = "https://www.hsbc.co.in/accounts/products/savings/#:~:text=Manage%20and%20transact%20on%20your,effective%20from%2013%20September%202021."
 bcode = 404
 
-driver = webdriver.Chrome()
+from selenium.webdriver.chrome.options import Options
+
+# Set up Chrome options
+chrome_options = Options()
+chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(options=chrome_options)
 def get_date():
     try:
         res = Request(url=url, headers={'User-Agen':'Mozilla/5.0'})

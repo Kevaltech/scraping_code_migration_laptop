@@ -3,7 +3,12 @@ from selenium import webdriver
 import requests
 import datefinder
 
-driver = webdriver.Chrome() 
+from selenium.webdriver.chrome.options import Options
+
+# Set up Chrome options
+chrome_options = Options()
+chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(options=chrome_options)
 url = "https://www.kvb.co.in/interest-rates/interest-rate-for-saving-account/"
 bcode = 214
 def get_date():

@@ -3,7 +3,12 @@ import requests
 import datefinder 
 from selenium import webdriver 
 
-driver = webdriver.Chrome()
+from selenium.webdriver.chrome.options import Options
+
+# Set up Chrome options
+chrome_options = Options()
+chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(options=chrome_options)
 
 url = "https://www.hdfcbank.com/personal/save/accounts/savings-accounts/savings-account-interest-rate"
 bcode = 207

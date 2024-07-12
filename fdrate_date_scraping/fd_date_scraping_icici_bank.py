@@ -6,7 +6,12 @@ from urllib.request import urlopen
 
 url = "https://www.icicibank.com/personal-banking/deposits/fixed-deposit/fd-interest-rates?ITM=nli_cms_IR_service_charges_fd_premature"
 bcode = 208
-driver = webdriver.Chrome()
+from selenium.webdriver.chrome.options import Options
+
+# Set up Chrome options
+chrome_options = Options()
+chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(options=chrome_options)
 
 def get_date():
 

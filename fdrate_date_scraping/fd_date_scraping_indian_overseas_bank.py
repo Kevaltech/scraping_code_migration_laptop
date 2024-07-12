@@ -5,7 +5,12 @@ from urllib.request import urlopen
 from selenium import webdriver
 from datetime import datetime
 
-driver = webdriver.Chrome()
+from selenium.webdriver.chrome.options import Options
+
+# Set up Chrome options
+chrome_options = Options()
+chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(options=chrome_options)
 url ='https://www.iob.in/Domestic_Rates'
 bcode = 106
 

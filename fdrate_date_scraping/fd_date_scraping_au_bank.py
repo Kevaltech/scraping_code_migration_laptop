@@ -5,7 +5,12 @@ from selenium import webdriver
 
 url = 'https://www.aubank.in/interest-rates/fixed-deposit-interest-rates'
 bcode = 300
-driver = webdriver.Chrome()
+from selenium.webdriver.chrome.options import Options
+
+# Set up Chrome options
+chrome_options = Options()
+chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(options=chrome_options)
 def get_date():
     
     try:
