@@ -115,8 +115,8 @@ def schema_storage():
 
         val = (banks[i][0], dates[i], todays_date)
         data.append(val)
-    for d in data:
-        cursor.execute(f"INSERT into fdrate_date_scrape(bank_name, last_change_date, todays_date) VALUES (%s, %s, %s)", d)
+    # for d in data:
+    #     cursor.execute(f"INSERT into fdrate_date_scrape(bank_name, last_change_date, todays_date) VALUES (%s, %s, %s)", d)
 
     # Commit changes and close connection
     conn.commit()
