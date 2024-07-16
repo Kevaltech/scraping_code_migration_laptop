@@ -16,7 +16,7 @@ conn = psycopg2.connect(
 )
 #for kvb bank wait for some time it.
 cursor = conn.cursor()
-query_to_run = "select bcode, display_name,fd_url, active, bref from api_bstat"
+query_to_run = "select bcode, display_name,fd_url, active, bref from bstat"
 cursor = conn.cursor()
 cursor.execute(query_to_run)
 rows = cursor.fetchall()
@@ -113,7 +113,13 @@ def schema_storage():
             update_dates_info = f"update dates_info set fdrate_page_not_open={0} where bank_name='{banks[i][0]}'"
             cursor.execute(update_dates_info)
 
-        val = (banks[i][0], dates[i], todays_date)
+        updateDate = dates[i]
+        if datetime.datetime.strptime(dates[i], '%d-%b-%y') > datetime.datetime.strptime(todays_date, '%d-%b-%y'):
+            date_val = datetime.datetime.strptime(dates[i], '%d-%b-%y')
+            date_val = date_val.strftime("%d/%m/%y")
+            updateDate = datetime.datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
+        dates[i]=updateDate
+        val = (banks[i][0], updateDate, todays_date)
         data.append(val)
     for d in data:
         cursor.execute(f"INSERT into fdrate_date_scrape(bank_name, last_change_date, todays_date) VALUES (%s, %s, %s)", d)

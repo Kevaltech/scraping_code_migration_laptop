@@ -15,7 +15,7 @@ conn = psycopg2.connect(
     )
 
 cursor = conn.cursor()
-query_to_run = "select bcode, display_name, sd_url, active, bref from api_bstat"
+query_to_run = "select bcode, display_name, sd_url, active, bref from bstat"
 cursor = conn.cursor()
 cursor.execute(query_to_run)
 rows = cursor.fetchall()
@@ -119,10 +119,12 @@ def schema_storage():
         # Create a tuple of bank name, date and today's date and append it to the data list
         updateDate = dates[i]
         if datetime.datetime.strptime(dates[i], '%d-%b-%y') > datetime.datetime.strptime(todays_date, '%d-%b-%y'):
-            date_val = dates[i].strftime("%d/%m/%y")
-            updateDate = datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
-        
+            date_val = datetime.datetime.strptime(dates[i], '%d-%b-%y')
+            date_val = date_val.strftime("%d/%m/%y")
+            updateDate = datetime.datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
+        dates[i]=updateDate
         val = (banks[i][0], updateDate, todays_date)
+        data.append(val)
         data.append(val)
     
     # Insert the data into the 'sdrate_date_scrape' table
