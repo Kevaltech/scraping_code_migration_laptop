@@ -4,12 +4,7 @@ import datefinder
 from selenium import webdriver
 from urllib.request import urlopen
 from datetime import datetime
-from selenium.webdriver.chrome.options import Options
-
-# Set up Chrome options
-chrome_options = Options()
-chrome_options.add_argument("--no-sandbox")
-driver = webdriver.Chrome(options=chrome_options)
+driver = webdriver.Chrome()
 
 url = "https://www.csb.co.in/interest-rates"
 bcode = 203
@@ -30,8 +25,7 @@ def get_date():
         dates = datefinder.find_dates(cn)
         redate = ""
         for date in dates:
-            date_val = date.strftime("%d/%m/%y")
-            redate += datetime.strptime(date_val, '%m/%d/%y').strftime("%d-%b-%y")
+            redate += date.strftime("%d-%b-%y")
 
         driver.quit()
         return redate, bcode
